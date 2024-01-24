@@ -16,6 +16,9 @@ const config: Config = {
       fontFamily:{
         Montserrat : ['Montserrat', 'sans-serif'],
         Poppins : ['Poppins', 'sans-serif']
+      },
+      colors:{
+        pallette: {yellow: '#DDFE02', indigo: '#632B8D', pink: '#9a1163'}
       }
     },
   },
