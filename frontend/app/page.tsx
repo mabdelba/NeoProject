@@ -4,6 +4,7 @@ import Logo from '@/public/logo.svg'
 import SimpleInput from "@/Components/SimpleInput";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
@@ -12,6 +13,7 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [vpassword, setVpassword] = useState('');
+  const router = useRouter();
 
 
   const handleSubmit = (e: any) => {
@@ -73,7 +75,7 @@ export default function Home() {
         <label htmlFor="check" className="font-Montserrat  text-white flex items-center"><input type="checkbox" className="min-h-6 min-w-6 rounded-full mr-2" id="check" required/>Confirm your <span className="text-[#DDFE02] ml-1 hover:text-blue-500 font-Montserrat underline underline-offset-4">privacy policy</span></label>
         <div className="h-1"></div>
         <button type="submit" className="min-h-16 min-w-20 mt-2 bg-pallette-yellow hover:bg-yellow-100 text-2xl font-Montserrat font-semibold  outline-none rounded-xl">Sign up</button>
-        <span className="my-0 mx-auto text-white font-Poppins text-lg font-semibold">Already have an account <span className="ml-1 text-lg font-bold text-pallette-yellow hover:underline cursor-pointer underline-offset-4">Sign in</span></span>
+        <span className="my-0 mx-auto text-white font-Poppins text-lg font-semibold">Already have an account <span onClick={()=> router.push('/signin')} className="ml-1 text-lg font-bold text-pallette-yellow hover:underline cursor-pointer underline-offset-4">Sign in</span></span>
       </form>
     </main>
   );
