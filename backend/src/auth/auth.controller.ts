@@ -37,4 +37,17 @@ import {
           }
         throw e;
       };
-    }}
+    }
+    @Post('login')
+    async login(@Body() dto: {email: string, password: string}) {
+       const user = await this.prisma.user.findUnique({
+        where: { email: dto.email},
+      });
+      if (!user) throw new ForbiddenException('User not found');
+      const isPasswordValid = await argon.verify(user.password, dto.password);
+      if (!isPasswordValid) throw new ForbiddenException('Wrong password');
+      return {
+        token: await this.jwt.signAsync({ email: user.email, sub: user.id }, { expiresIn: '1d', secret: this.config.get('JWT_SECRET') }),
+      };
+    }
+}
