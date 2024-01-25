@@ -3,6 +3,7 @@ import Image from "next/image";
 import Logo from '@/public/logo.svg'
 import SimpleInput from "@/Components/SimpleInput";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Home() {
 
@@ -24,8 +25,23 @@ export default function Home() {
     console.log(vpassword)
     if(password !== vpassword)
       console.log("error ")
-    else
-      console.log("you can post")
+    else{
+
+      const apiUrl = "http://localhost:8000/auth/register";
+      const requestData = {
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+        password: password,
+      };
+      axios.post(apiUrl, requestData).then((response)=>{
+
+        console.log(response);
+      })
+      .catch((e)=>{
+        console.log("error", e);
+      })
+    }
     
   }
 
